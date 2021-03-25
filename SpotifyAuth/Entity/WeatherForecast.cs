@@ -1,6 +1,6 @@
 using System;
 
-namespace SpotifyAuth
+namespace SpotifyAuth.Entity
 {
     public class WeatherForecast
     {

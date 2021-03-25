@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyAuth", "SpotifyAuth\SpotifyAuth.csproj", "{13640693-80E3-4D26-A520-6413E94FE4D1}"
 EndProject
