@@ -1,0 +1,1 @@
+﻿dotnet ef migrations add %1 -c AppDbContext -o ../SpotifyAuth.Persistence/Migrations/ -p ../SpotifyAuth.Persistence/SpotifyAuth.Persistence.csproj

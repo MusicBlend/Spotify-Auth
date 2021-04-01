@@ -4,11 +4,15 @@ WORKDIR /app
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY SpotifyAuth/*.csproj ./SpotifyAuth/
+COPY SpotifyAuth.Persistence/*.csproj ./SpotifyAuth.Persistence/
+COPY SpotifyAuth.Domain/*.csproj ./SpotifyAuth.Domain/
 #
 RUN dotnet restore 
 #
 # copy everything else and build app
 COPY SpotifyAuth/. ./SpotifyAuth/
+COPY SpotifyAuth.Persistence/. ./SpotifyAuth.Persistence/
+COPY SpotifyAuth.Domain/. ./SpotifyAuth.Domain/
 #
 WORKDIR /app/SpotifyAuth
 RUN dotnet publish -c Release -o out 

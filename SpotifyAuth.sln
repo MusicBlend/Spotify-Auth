@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyAuth", "SpotifyAuth\SpotifyAuth.csproj", "{13640693-80E3-4D26-A520-6413E94FE4D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyAuth.Persistence", "SpotifyAuth.Persistence\SpotifyAuth.Persistence.csproj", "{0FEECC06-2162-4F0A-A272-50C5F6D3B4A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyAuth.Domain", "SpotifyAuth.Domain\SpotifyAuth.Domain.csproj", "{2760602B-CFCF-4591-9BB9-C803F4E1BF9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{13640693-80E3-4D26-A520-6413E94FE4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13640693-80E3-4D26-A520-6413E94FE4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13640693-80E3-4D26-A520-6413E94FE4D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FEECC06-2162-4F0A-A272-50C5F6D3B4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FEECC06-2162-4F0A-A272-50C5F6D3B4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FEECC06-2162-4F0A-A272-50C5F6D3B4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FEECC06-2162-4F0A-A272-50C5F6D3B4A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2760602B-CFCF-4591-9BB9-C803F4E1BF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2760602B-CFCF-4591-9BB9-C803F4E1BF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2760602B-CFCF-4591-9BB9-C803F4E1BF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2760602B-CFCF-4591-9BB9-C803F4E1BF9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
