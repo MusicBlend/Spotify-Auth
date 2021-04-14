@@ -18,19 +18,17 @@ namespace SpotifyAuth.Controllers
     public class SpotifyAuthenticationController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IUserRepository _userRepository;
 
-        public SpotifyAuthenticationController(IConfiguration configuration, IUserRepository userRepository)
+        public SpotifyAuthenticationController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _userRepository = userRepository;
         }
         
         [HttpGet]
         public Array UserAuthentication()
         {
             var loginRequest = new LoginRequest(
-                new Uri("http://localhost:3000/callback"),
+                new Uri("http://localhost:3000/communities"),
                 "23b8bcc8a7db46e499cc3d7c6ace0de5",
                 LoginRequest.ResponseType.Code
             ) 
@@ -44,44 +42,35 @@ namespace SpotifyAuth.Controllers
         }
         
         [HttpGet("{code}")]
-        public async Task<Array> GetToken(string code)
+        public async Task<Array> GetAccessToken(string code)
         {
-            Uri redirectUrl = new Uri("http://localhost:3000/callback");
+            Uri redirectUrl = new Uri("http://localhost:3000/communities");
             
             var response = await new OAuthClient().RequestToken(
                 new AuthorizationCodeTokenRequest(_configuration.GetValue<string>("clientId"), _configuration.GetValue<string>("clientSecret"), code, redirectUrl)
             );
-
             var spotify = new SpotifyClient(response.AccessToken);
-            await AddUserToDb(response);
-
+            
             string[] arr = {response.AccessToken};
             return arr;
         }
         
-        [HttpGet("v1/{code}")]
-        public async Task<Array> GetUserProfile(string code)
+        [HttpGet("id/{accessToken}")]
+        public async Task<Array> GetUserId(string accessToken)
         {
-            var spotify = new SpotifyClient(code);
+            var spotify = new SpotifyClient(accessToken);
             var user = await spotify.UserProfile.Current();
-            
-            string[] arr = {user.DisplayName, user.Href, user.Id};
+            string[] arr = {user.Id};
             return arr;
         }
-
-        public async Task AddUserToDb(AuthorizationCodeTokenResponse response)
+        
+        [HttpGet("name/{accessToken}")]
+        public async Task<Array> GetName(string accessToken)
         {
-            var spotify = new SpotifyClient(response.AccessToken);
-            var spotifyUser = await spotify.UserProfile.Current();
-            User user = new User()
-            {
-                Id = Guid.NewGuid(),
-                Name = spotifyUser.DisplayName,
-                Email = spotifyUser.Email,
-                AccessToken = response.AccessToken,
-                RefreshToken = response.RefreshToken
-            };
-            await _userRepository.AddUser(user);
+            var spotify = new SpotifyClient(accessToken);
+            var user = await spotify.UserProfile.Current();
+            string[] arr = {user.DisplayName};
+            return arr;
         }
     }
 }
