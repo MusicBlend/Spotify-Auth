@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using SpotifyAPI.Web;
-using SpotifyAuth.Domain.Entities;
-using SpotifyAuth.Domain.Interfaces.IRepository;
-using SpotifyAuth.Entity;
+
 
 namespace SpotifyAuth.Controllers
 {
@@ -29,7 +23,7 @@ namespace SpotifyAuth.Controllers
         {
             var loginRequest = new LoginRequest(
                 new Uri("http://localhost:3000/communities"),
-                "23b8bcc8a7db46e499cc3d7c6ace0de5",
+                _configuration.GetValue<string>("clientId"),
                 LoginRequest.ResponseType.Code
             ) 
             {
@@ -47,7 +41,10 @@ namespace SpotifyAuth.Controllers
             Uri redirectUrl = new Uri("http://localhost:3000/communities");
             
             var response = await new OAuthClient().RequestToken(
-                new AuthorizationCodeTokenRequest(_configuration.GetValue<string>("clientId"), _configuration.GetValue<string>("clientSecret"), code, redirectUrl)
+                new AuthorizationCodeTokenRequest(
+                    _configuration.GetValue<string>("clientId"), 
+                    _configuration.GetValue<string>("clientSecret"), 
+                    code, redirectUrl)
             );
             var spotify = new SpotifyClient(response.AccessToken);
             

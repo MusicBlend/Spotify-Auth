@@ -6,6 +6,5 @@ namespace SpotifyAuth.Domain.Entities
     public class User
     {
         public Guid String { get; set; }
-        public String Name { get; set; }
     }
 }
